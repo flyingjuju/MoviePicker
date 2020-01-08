@@ -13,6 +13,21 @@ struct ContentView: View {
     var body: some View {
         VStack{
             ImageViewWidget(imageUrl: "https://image.tmdb.org/t/p/w400\(networkingManager.movie.poster_path)")
+            if(networkingManager.movie.title.isEmpty){
+                Button(action:{
+                    self.networkingManager.reload()
+                    print("button works")
+                }){
+                    Text("Click again")
+                }
+            } else {
+                Button(action:{
+                    self.networkingManager.reload()
+                    print("button works")
+                }){
+                    Text("Click")
+                }
+            }
             Text(networkingManager.movie.title)
             Text(networkingManager.movie.overview)
         }
@@ -43,7 +58,7 @@ struct ImageViewWidget: View {
     var body: some View {
         Image(uiImage: (imageLoader.data.isEmpty) ? image! : UIImage(data: imageLoader.data)! )
         .resizable()
-            .frame(width:400, height:400)
+            .frame(width:400, height:500)
     }
 }
    
