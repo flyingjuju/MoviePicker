@@ -13,6 +13,7 @@
 		8BE4B19923C6730600C8B311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4B19823C6730600C8B311 /* Assets.xcassets */; };
 		8BE4B19C23C6730600C8B311 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4B19B23C6730600C8B311 /* Preview Assets.xcassets */; };
 		8BE4B19F23C6730600C8B311 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4B19D23C6730600C8B311 /* LaunchScreen.storyboard */; };
+		8BE4B1A723C673BB00C8B311 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4B1A623C673BB00C8B311 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8BE4B19B23C6730600C8B311 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8BE4B19E23C6730600C8B311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BE4B1A023C6730600C8B311 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BE4B1A623C673BB00C8B311 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				8BE4B19D23C6730600C8B311 /* LaunchScreen.storyboard */,
 				8BE4B1A023C6730600C8B311 /* Info.plist */,
 				8BE4B19A23C6730600C8B311 /* Preview Content */,
+				8BE4B1A623C673BB00C8B311 /* ViewController.swift */,
 			);
 			path = MoviePicker;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			files = (
 				8BE4B19323C6730300C8B311 /* AppDelegate.swift in Sources */,
 				8BE4B19523C6730300C8B311 /* SceneDelegate.swift in Sources */,
+				8BE4B1A723C673BB00C8B311 /* ViewController.swift in Sources */,
 				8BE4B19723C6730300C8B311 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
