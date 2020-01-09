@@ -11,40 +11,56 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var networkingManager = NetworkingManager()
     var body: some View {
-        VStack{
+
+        VStack(spacing: 0.0){
             ImageViewWidget(imageUrl: "https://image.tmdb.org/t/p/w400\(networkingManager.movie.poster_path)")
-            if(networkingManager.movie.title.isEmpty){
+
                 Button(action:{
                     self.networkingManager.reload()
                     print("button works")
                 }){
-                    Text("Click again")
+                    Text("M")
+                        .font(.system(size:70))
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        .frame(width: 120, height: 120)
                 }
-            } else {
-                Button(action:{
-                    self.networkingManager.reload()
-                    print("button works")
-                }){
-                    Text("Click")
-                }
-            }
+                .accentColor(.white)
+                .background(Color.red)
+                .cornerRadius(100)
+                .frame(width: 120, height: 120)
+                .offset(y:-75)
+                .padding(.bottom, -75)
+                .shadow(radius: 10)
+
+           
             Text(networkingManager.movie.title)
+                .font(.title)
+                .foregroundColor(Color.blue)
+                .multilineTextAlignment(.center)
+                .frame(minHeight:20, maxHeight:70)
+                
             Text(networkingManager.movie.overview)
+                .font(.body)
+                .multilineTextAlignment(.leading)
         }
+        .padding(.top, 0.0)
     }
 }
 
 class ImageLoader: ObservableObject {
-    @Published var data = Data()
+    @Published var data: Data?
     init(imageUrl: String) {
         guard let url = URL(string: imageUrl) else {return}
         print("url: \(url)")
-        URLSession.shared.dataTask(with: url){ (data,_,_) in
+        let task = URLSession.shared.dataTask(with: url){ (data,response,error) in
             guard let data = data else {return}
             DispatchQueue.main.async {
                 self.data = data
             }
-        }.resume()
+        }
+        task.resume()
     }
 }
 
@@ -53,12 +69,13 @@ struct ImageViewWidget: View {
     init(imageUrl: String){
         imageLoader =  ImageLoader(imageUrl: imageUrl)
     }
-    let image = UIImage(named: "rotate")
-   
+    
     var body: some View {
-        Image(uiImage: (imageLoader.data.isEmpty) ? image! : UIImage(data: imageLoader.data)! )
-        .resizable()
-            .frame(width:400, height:500)
+        Image(uiImage: imageLoader.data != nil ? UIImage(data: imageLoader.data!)!  : UIImage())
+            .resizable()
+            .frame(height: 550.0)
+            .padding(.top, 0.0)
+            
     }
 }
    
