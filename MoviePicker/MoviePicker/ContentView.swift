@@ -10,14 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var networkingManager = NetworkingManager()
+    @State var click = false
+   
     var body: some View {
-
         VStack(spacing: 0.0){
+            if self.click ==  true {
             ImageViewWidget(imageUrl: "https://image.tmdb.org/t/p/w400\(networkingManager.movie.poster_path)")
-
+            }
                 Button(action:{
-                    self.networkingManager.reload()
-                    print("button works")
+                    self.click = true
+                    self.networkingManager.load()
                 }){
                     Text("M")
                         .font(.system(size:70))
@@ -34,16 +36,28 @@ struct ContentView: View {
                 .padding(.bottom, -75)
                 .shadow(radius: 10)
 
-           
-            Text(networkingManager.movie.title)
-                .font(.title)
-                .foregroundColor(Color.blue)
-                .multilineTextAlignment(.center)
-                .frame(minHeight:20, maxHeight:70)
-                
-            Text(networkingManager.movie.overview)
-                .font(.body)
-                .multilineTextAlignment(.leading)
+           if self.click ==  true {
+            // since not every movieId works, "Toy Story 4" is the default
+            if(networkingManager.movie.title != "Toy Story 4"){
+                Button(action:{
+                    UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/\(self.networkingManager.movie.id)")!)
+                }){
+                     Text(networkingManager.movie.title)
+                     .font(.title)
+                }
+            } else {
+                Button(action:{
+                    UIApplication.shared.open(URL(string: "https://www.themoviedb.org/movie/301528")!)
+                }){
+                     Text(networkingManager.movie.title)
+                     .font(.title)
+                }
+            }
+
+                Text(networkingManager.movie.overview)
+                           .font(.body)
+                           .multilineTextAlignment(.leading)
+            }
         }
         .padding(.top, 0.0)
     }
@@ -74,8 +88,7 @@ struct ImageViewWidget: View {
         Image(uiImage: imageLoader.data != nil ? UIImage(data: imageLoader.data!)!  : UIImage())
             .resizable()
             .frame(height: 550.0)
-            .padding(.top, 0.0)
-            
+            .padding(.vertical, 0.0)
     }
 }
    
